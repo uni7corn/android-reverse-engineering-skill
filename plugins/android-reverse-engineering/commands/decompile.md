@@ -2,6 +2,7 @@
 allowed-tools: Bash, Read, Glob, Grep, Write, Edit
 description: Decompile an Android APK/XAPK/JAR/AAR and analyze its structure
 user-invocable: true
+argument-hint: <path to APK, XAPK, JAR, or AAR file>
 argument: path to APK, XAPK, JAR, or AAR file (optional)
 ---
 
