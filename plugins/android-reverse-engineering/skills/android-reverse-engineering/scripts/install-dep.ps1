@@ -232,22 +232,23 @@ function Install-Dex2Jar {
     }
 
     Write-Info "Installing dex2jar from GitHub releases..."
-    $tag = try { Get-GHLatestTag "pxb1988/dex2jar" } catch { "v2.4" }
-    if (-not $tag) { $tag = "v2.4" }
+    $tag = try { Get-GHLatestTag "ThexXTURBOXx/dex2jar" } catch { "2.4.35" }
+    if (-not $tag) { $tag = "2.4.35" }
 
     $version = $tag -replace '^v', ''
-    $url = "https://github.com/pxb1988/dex2jar/releases/download/$tag/dex-tools-v$version.zip"
+    $url = "https://github.com/ThexXTURBOXx/dex2jar/releases/download/$tag/dex-tools-$version.zip"
     $tmpZip = Join-Path $env:TEMP "dex2jar-$version.zip"
 
     try {
         Invoke-Download -Url $url -Dest $tmpZip
     } catch {
-        $url = "https://github.com/pxb1988/dex2jar/releases/download/$tag/dex-tools-$version.zip"
+        # Try alternate naming (pre-2.4.30 releases)
+        $url = "https://github.com/ThexXTURBOXx/dex2jar/releases/download/$tag/dex-tools-v$version.zip"
         try {
             Invoke-Download -Url $url -Dest $tmpZip
         } catch {
             Write-Fail "Download failed."
-            Write-Manual "Download from https://github.com/pxb1988/dex2jar/releases/latest"
+            Write-Manual "Download from https://github.com/ThexXTURBOXx/dex2jar/releases/latest"
         }
     }
 
@@ -264,7 +265,7 @@ function Install-Dex2Jar {
     }
     if (-not $d2jBat) {
         Write-Fail "Could not find d2j-dex2jar in extracted archive."
-        Write-Manual "Download and extract manually from https://github.com/pxb1988/dex2jar/releases"
+        Write-Manual "Download and extract manually from https://github.com/ThexXTURBOXx/dex2jar/releases"
     }
 
     $binDir = $d2jBat.DirectoryName
